@@ -9,6 +9,7 @@ type Config struct {
 	HTTP     HTTPConfig
 	Database DatabaseConfig
 	JWT      JWTConfig
+	Logger   LoggerConfig
 }
 
 type HTTPConfig struct {
@@ -34,4 +35,14 @@ type JWTConfig struct {
 	Secret    string
 	ExpiresIn time.Duration
 	RefreshIn time.Duration
+}
+
+type LoggerConfig struct {
+	Level      string
+	JSONFormat bool
+	LogFile    string
+	MaxSize    int
+	MaxBackups int
+	MaxAge     int
+	Compress   bool
 }

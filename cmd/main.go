@@ -5,11 +5,16 @@ import (
 
 	"github.com/farzadamr/go-clean-api/api"
 	"github.com/farzadamr/go-clean-api/config"
+	"github.com/farzadamr/go-clean-api/pkg/logging"
 )
 
 func main() {
+	// load config
 	cfg := LoadAndParseConfig()
-
+	if err := logging.Init(cfg); err != nil {
+		log.Fatalf("logger can not initialized: %w", err)
+	}
+	logging.Debug("Starting The Server on:", "port", cfg.HTTP.Port)
 	log.Fatal(api.Run(cfg))
 }
 

@@ -31,6 +31,15 @@ func Parse() (*Config, error) {
 			ExpiresIn: getEnvAsDuration("JWT_EXPIRES_IN", 24*time.Hour),
 			RefreshIn: getEnvAsDuration("JWT_REFRESH_IN", 72*time.Hour),
 		},
+		Logger: LoggerConfig{
+			Level:      getEnv("LOG_LEVEL", "info"),
+			JSONFormat: getEnvAsBool("LOG_JSON_FORMAT", true),
+			LogFile:    getEnv("LOG_FILE", "./logs/app.log"),
+			MaxSize:    getEnvAsInt("LOG_MAX_SIZE", 100),
+			MaxBackups: getEnvAsInt("LOG_MAX_BACKUPS", 5),
+			MaxAge:     getEnvAsInt("LOG_MAX_AGE", 25),
+			Compress:   getEnvAsBool("LOG_COMPRESS", true),
+		},
 	}
 
 	// validation
